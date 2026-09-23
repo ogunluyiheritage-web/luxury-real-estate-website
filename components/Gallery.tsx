@@ -1,0 +1,6 @@
+'use client';
+import {useEffect,useState} from 'react';import Pic from './Pic';
+export default function Gallery({items,name}:{items:{label:string;src:string}[];name:string}){const [i,si]=useState<number|null>(null);
+ useEffect(()=>{if(i===null)return;const k=(e:KeyboardEvent)=>{if(e.key==='Escape')si(null);if(e.key==='ArrowRight')si((i+1)%items.length);if(e.key==='ArrowLeft')si((i+items.length-1)%items.length)};addEventListener('keydown',k);return()=>removeEventListener('keydown',k)},[i,items.length]);
+ return <><ul className="hscroll">{items.map((g,n)=><li key={g.label}><button onClick={()=>si(n)} aria-label={`Open ${g.label} of ${name}`}><Pic src={g.src} alt={`${name} ${g.label}`} sizes="70vw"/></button><span>{g.label}</span></li>)}</ul>
+ {i!==null&&<div className="lb" role="dialog" aria-modal="true" aria-label="Gallery"><button className="x pill" autoFocus onClick={()=>si(null)}>Close</button><button className="pill prev" onClick={()=>si((i+items.length-1)%items.length)} aria-label="Previous">‹</button><Pic src={items[i].src} alt={`${name} ${items[i].label}`} sizes="100vw" cls="lbimg"/><button className="pill nxt" onClick={()=>si((i+1)%items.length)} aria-label="Next">›</button><p>{items[i].label}</p></div>}</>}
