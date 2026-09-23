@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';import {Cormorant_Garamond,Inter} from 'next/font/google';import Link from 'next/link';import './globals.css';import Nav from '@/components/Nav';
-const serif=Cormorant_Garamond({subsets:['latin'],weight:['300','400','500'],variable:'--serif'}),sans=Inter({subsets:['latin'],variable:'--sans'});
+const serif=Cormorant_Garamond({subsets:['latin'],weight:['300','400','500'],variable:'--serif'});
+const sans=Inter({subsets:['latin'],variable:'--sans'});
 const base=process.env.NEXT_PUBLIC_SITE_URL||'https://aurelia-estates.vercel.app';
 export const metadata:Metadata={metadataBase:new URL(base),title:{default:'Aurelia Estates — Luxury architectural residences',template:'%s | Aurelia Estates'},description:'A cinematic tour of Aurelia Estate and a collection of 20 exceptional residences.',openGraph:{type:'website',siteName:'Aurelia Estates',title:'Aurelia Estates',description:'Walk through a luxury residence before you visit.'},twitter:{card:'summary_large_image'},alternates:{canonical:'/'}};
 export default function Root({children}:{children:React.ReactNode}){return <html lang="en" className={serif.variable+' '+sans.variable}><body><a className="skip" href="#main">Skip to content</a><Nav/><main id="main">{children}</main>
